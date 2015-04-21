@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+version = '1.0.0'
+group = 'com.xyrality.gradle'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile gradleApi()
+	compile localGroovy()
+	compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.1'
+	compile 'commons-io:commons-io:2.4'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
