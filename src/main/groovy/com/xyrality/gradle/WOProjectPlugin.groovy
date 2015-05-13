@@ -30,7 +30,7 @@ class WOProject implements Plugin<Project> {
 		project.getPlugins().apply(JavaPlugin.class)
 		project.getPlugins().apply(MavenPlugin.class)
 		project.getPlugins().apply(EclipsePlugin.class)
-		
+
 		project.extensions.create('wonder', WOProjectPluginExtension)
 
 		if (!project.hasProperty('version') || (project.version == 'unspecified')) {
@@ -60,18 +60,18 @@ class WOProject implements Plugin<Project> {
 	def configureWOProjectDependency(Project project) {
 		project.with {
 			def woProjectURL = 'http://webobjects.mdimension.com/hudson/job/WOLips36Stable/lastSuccessfulBuild/artifact/woproject.jar'
-			def woProjectLibs = new File(project.projectDir, 'woproject-libs')
+			def woProjectLibs = new File(project.rootProject.projectDir, 'woproject-libs')
 			woProjectLibs.mkdirs()
-			
+
 			def woProjectLocalPath = new File(woProjectLibs, 'woproject.jar')
 			if (!woProjectLocalPath.exists()) {
 				logger.warn 'Missing woproject.jar, downloading to ' + woProjectLocalPath.path + '...'
-				
+
 				def outputStream = woProjectLocalPath.newOutputStream()
 				outputStream << new URL(woProjectURL).openStream()
 				outputStream.close()
-			} 
-			
+			}
+
 			configurations { woproject }
 
 			dependencies {
@@ -88,7 +88,7 @@ class WOProject implements Plugin<Project> {
 					java { srcDirs = ['Sources']}
 					resources { srcDirs = ['Resources']}
 				}
-				
+
 				test {
 					java { srcDirs = ['TestSources']}
 					resources { srcDirs = ['TestResources']}
