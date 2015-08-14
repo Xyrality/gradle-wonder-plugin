@@ -20,12 +20,14 @@ Check out the plugin and run `gradle build publishToMavenLocal` to publish into 
 	}
 
 	version = '1.2.3'
+	ext {
+		webobjectsVersion = '5.4.3'
+		wonderVersion = '6.1.2'
+	}
 
 	apply plugin: 'woapplication'
 
 	wonder {
-		wonderVersion = '6.1.2'
-		webobjectsVersion = '5.4.3'
 		applicationClass = 'er.movies.Application'
 
 		deploymentServers = ['localhost']

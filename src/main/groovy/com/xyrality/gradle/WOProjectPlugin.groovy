@@ -37,6 +37,14 @@ class WOProject implements Plugin<Project> {
 			throw new InvalidUserDataException('Subprojects need to define their versions')
 		}
 
+		if (project.hasProperty('webobjectsVersion') && (project.webobjectsVersion != 'unspecified')) {
+			project.wonder.webobjectsVersion = project.webobjectsVersion
+		}
+
+		if (project.hasProperty('wonderVersion') && (project.wonderVersion != 'unspecified')) {
+			project.wonder.wonderVersion = project.wonderVersion
+		}
+
 		project.ext {
 			versionNameSuffix = (new Date()).format('-yyyyMMdd-HHmm')
 			dependencyLibDir = new File(project.buildDir, 'dependency-libs')
